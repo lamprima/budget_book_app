@@ -1,0 +1,10 @@
+sys
+pandas
+glob
+os
+datetime
+streamlit
+matplotlib
+plotly.express as px
+subproces
+PIL
