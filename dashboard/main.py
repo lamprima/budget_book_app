@@ -46,7 +46,7 @@ if __name__ == '__main__':
             background-size: cover;
             background-position: center;
             background-color: black;
-            color: rgb(0, 255, 255);
+            color: rgb(0, 206, 209);
         }}
         .stApp > header {{
             background-color: black;
@@ -54,7 +54,13 @@ if __name__ == '__main__':
         }}
        [data-testid=stSidebar] {{
            background-color: rgb(47,79,79);
-           color: rgb(0, 255, 255);
+           color: rgb(0, 206, 209);
+       }}
+       [data-testid=stSelectbox] {{
+           color: rgb(0, 206, 209);
+       }}
+       [data-testid=stMarkdownContainer] {{
+           color: rgb(0, 206, 209);
        }}
     </style>
     '''
