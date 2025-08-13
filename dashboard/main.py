@@ -36,7 +36,8 @@ if __name__ == '__main__':
     sheet_names:list = make_sheet_names(start_year, end_year)
     
     # アプリのアイコン読み込み
-    im = Image.open("..\\ico\\app.ico")
+    #im = Image.open("..\\ico\\app.ico")
+    im = Image.open("app.ico")
 
     set_config(im)
     st.markdown(HIDE_ST_STYLE, unsafe_allow_html=True)
