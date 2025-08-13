@@ -37,9 +37,9 @@ if __name__ == '__main__':
     
     # アプリのアイコン読み込み
     #im = Image.open("..\\ico\\app.ico")
-    im = Image.open("app.ico")
+    #im = Image.open("app.ico")
 
-    set_config(im)
+    #set_config(im)
     st.markdown(HIDE_ST_STYLE, unsafe_allow_html=True)
     
     st.title('家計簿アプリ')
