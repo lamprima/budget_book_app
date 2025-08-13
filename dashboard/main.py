@@ -6,7 +6,7 @@ import glob
 import os
 import datetime
 import streamlit as st
-import matplotlib
+#import matplotlib
 import plotly.express as px
 from streamlit.runtime.scriptrunner import add_script_run_ctx,get_script_run_ctx
 from subprocess import Popen
