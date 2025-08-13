@@ -38,7 +38,7 @@ if __name__ == '__main__':
     # 家計簿データの辞書を作成
     budget_book = {}
     for sheet_name in sheet_names:
-        df = pd.read_excel('C:\\temp\\日本株分析\\家計簿管理ツール.xlsm', sheet_name=sheet_name, index_col=None, usecols=[0,2,3,7,10,11])
+        df = pd.read_excel("..\\input\\家計簿管理ツール.xlsm", sheet_name=sheet_name, index_col=None, usecols=[0,2,3,7,10,11])
         budget_book[sheet_name] = preprocess_budget_data(df)
     
     # アプリのアイコン読み込み
