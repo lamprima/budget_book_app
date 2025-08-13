@@ -40,8 +40,28 @@ if __name__ == '__main__':
     #im = Image.open("app.ico")
 
     #set_config(im)
+    css = f'''
+    <style>
+        .stApp {{
+            background-size: cover;
+            background-position: center;
+            background-color: black;
+            color: rgb(0, 255, 255);
+        }}
+        .stApp > header {{
+            background-color: black;
+            color: rgb(0, 206, 209);
+        }}
+       [data-testid=stSidebar] {{
+           background-color: rgb(47,79,79);
+           color: rgb(0, 255, 255);
+       }}
+    </style>
+    '''
+    st.markdown(css, unsafe_allow_html=True)
+
     st.markdown(HIDE_ST_STYLE, unsafe_allow_html=True)
-    
+
     st.title('家計簿アプリ')
     
     st.sidebar.title("メニュー")
@@ -83,13 +103,14 @@ if __name__ == '__main__':
         compare_df = budget_book[make_sheet_name(compare_year)]
         time_sum_target_df = time_sum_budget_data(target_df, analyze_time, analyze_category)
         target_y_dtick = round(time_sum_target_df[CONST.EXPENCE].max() / 4, -3)
+        time_sum_compare_df = time_sum_budget_data(compare_df, analyze_time, analyze_category)
+        compare_y_dtick = round(time_sum_compare_df[CONST.EXPENCE].max() / 4, -3)
 
         with target_col:
             st.write(str(target_year) + '年' )
             st.write('レコード数：' + str(len(target_df)))
             st.dataframe(target_df)
             st.write(analyze_time + '単位集計')
-            
             st.dataframe(time_sum_target_df)
             #st.write(time_sum_budget_data(target_df, analyze_time).plot( y=['収入', '支出'], figsize=(16,4), alpha=0.5))
             #fig = px.line(time_sum_target_df, x=analyze_time, y=CONST.EXPENCE)
@@ -112,7 +133,21 @@ if __name__ == '__main__':
             st.write('レコード数：' + str(len(compare_df)))
             st.dataframe(compare_df)
             st.write(analyze_time + '単位集計')
-            st.dataframe(time_sum_budget_data(compare_df, analyze_time))
+            st.dataframe(time_sum_compare_df)
+
+            if analyze_category:
+                time_sum_compare_df = time_sum_compare_df.reset_index()
+                figC = px.bar(time_sum_compare_df, x=analyze_time, y=CONST.EXPENCE, color=CONST.CATEGORY, barmode='relative')
+            else:
+                figC = px.line(time_sum_compare_df, y=CONST.EXPENCE)
+            
+            figC.update_yaxes(tick0=0, dtick=compare_y_dtick)
+            figC.update_xaxes(tick0=1, dtick=1)
+            figC.update_yaxes(exponentformat='none', showline=True, linecolor='lightgrey', linewidth=2)
+            figC.update_xaxes(showline=True, linecolor='lightgrey', linewidth=2)
+            # ズームとパンの設定
+            figC.update_layout(xaxis=dict(rangeslider=dict(visible=True)), dragmode="pan") # dragmodeの選択肢:pan, select
+            st.plotly_chart(figC)
     
         st.write()
     else:
